@@ -1,9 +1,9 @@
 # Auto-generated __init__.py
 
 from . import spotify
-from . import youtube
+from .youtube import service
 
 __all__ = [
     "spotify",
-    "youtube",
+    "service",
 ]
