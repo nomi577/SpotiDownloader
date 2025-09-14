@@ -1,9 +1,17 @@
 # Auto-generated __init__.py
 
+from . import classes
+from .classes import Artist
+from .classes import Playlist
+from .classes import Track
 from . import spotify
-from .youtube import service
+from . import youtube
 
 __all__ = [
+    "classes",
     "spotify",
-    "service",
+    "youtube",
+    "Artist",
+    "Playlist",
+    "Track",
 ]

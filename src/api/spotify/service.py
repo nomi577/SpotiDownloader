@@ -11,14 +11,16 @@ from spotipy.oauth2 import SpotifyOAuth  # type: ignore[import-untyped]
 from api.classes import Artist, Playlist, Track, Tracks
 from typing import Any, Optional
 from config import config
-from api.spotify.types import SpotifyShareURLType
+from api.spotify.types import SpotifyShareURLType, PotUrl
 
 
 class SpotifyService:
     def __init__(self) -> None:
         self.__spotify: Spotify = Spotify(auth_manager=SpotifyOAuth)
 
-    def __get_pot_id(self, pot_url: str) -> Optional[tuple[str, SpotifyShareURLType]]:
+    def __get_pot_id(
+        self, pot_url: PotUrl
+    ) -> Optional[tuple[str, SpotifyShareURLType]]:
         if "open.spotify.com/playlist/" in pot_url:
             return pot_url.split("playlist/")[-1].split("?")[
                 0
@@ -98,7 +100,7 @@ class SpotifyService:
 
         return Playlist(name=name, tracks=tracks)
 
-    def get_pot(self, pot_url: str) -> Optional[Playlist | Track]:
+    def get_pot(self, pot_url: PotUrl) -> Optional[Playlist | Track]:
         parsed_pot_id: Optional[tuple[str, SpotifyShareURLType]] = self.__get_pot_id(
             pot_url=pot_url
         )

@@ -4,13 +4,7 @@
 # ============================== #
 
 
-from enum import Enum, auto
 from typing import NewType
 
 
-PotUrl = NewType("PotUrl", str)
-
-
-class SpotifyShareURLType(Enum):
-    PLAYLIST = auto()
-    TRACK = auto()
+YTVideoUrl = NewType("YTVideoUrl", str)

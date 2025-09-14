@@ -19,5 +19,8 @@ class Config:
     SPOTIFY_API_DELAY: float = 0.3
     SPOTIFY_BATCH_SIZE_TRACKS: int = 25
 
+    # Youtube
+    YOUTUBE_DATA_API_V3_API_KEY: str = str(os.getenv("YOUTUBE_DATA_API_V3_API_KEY"))
+
 
 config = Config()
