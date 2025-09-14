@@ -5,6 +5,7 @@
 
 
 import os
+import math
 
 from api.spotify.service import SpotifyService
 from api.youtube.service import YTService
@@ -41,12 +42,16 @@ class Downloader:
         self.__yt_service.download_audio(url=video_url, file_path=file_path)
 
     def __download_playlist(self, playlist: Playlist) -> None:
-        for track in playlist.tracks:
+        idx_num_digits: int = math.floor(math.log10(abs(len(playlist.tracks)))) + 1
+
+        for idx, track in enumerate(playlist.tracks):
             file_path: str = os.path.join(
                 config.YOUTUBE_DOWNLOAD_DIRECTORY,
                 playlist.name,
                 config.FILES_NAME_TEMPLATE.format(
-                    title=track.name, artist=track.artist.name
+                    title=track.name,
+                    artist=track.artist.name,
+                    index=f"{idx:>0{idx_num_digits}}",
                 ),
             )
 

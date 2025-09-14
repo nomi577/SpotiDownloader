@@ -25,7 +25,7 @@ class Config:
     YOUTUBE_QUERY_TEMPLATE: str = "{title} by {artist}"
 
     # Files
-    FILES_NAME_TEMPLATE: str = "{artist} - {title}"
+    FILES_NAME_TEMPLATE: str = "{index}_{title}_by_{title}"
 
 
 config = Config()
