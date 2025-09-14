@@ -84,7 +84,7 @@ class SpotifyService:
 
         return tracks
 
-    def get_playlist(self, playlist_id: str) -> Playlist:
+    def __get_playlist(self, playlist_id: str) -> Playlist:
         # Fetch api data
         api_playlist: dict[str, Any] = self.__spotify.playlist(  # type: ignore[reportUnknownMemberType]
             playlist_id=playlist_id
@@ -110,7 +110,7 @@ class SpotifyService:
 
         match url_type:
             case SpotifyShareURLType.PLAYLIST:
-                return self.get_playlist(playlist_id=pot_id)
+                return self.__get_playlist(playlist_id=pot_id)
 
             case SpotifyShareURLType.TRACK:
                 return self.__get_track(track_id=pot_id)
