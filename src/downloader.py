@@ -43,7 +43,7 @@ class Downloader:
     def __download_playlist(self, playlist: Playlist) -> None:
         idx_num_digits: int = math.floor(math.log10(abs(len(playlist.tracks)))) + 1
 
-        for idx, track in enumerate(playlist.tracks):
+        for idx, track in enumerate(playlist.tracks, start=1):
             file_path: str = os.path.join(
                 config.YOUTUBE_DOWNLOAD_DIRECTORY,
                 playlist.name,
