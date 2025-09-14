@@ -15,6 +15,7 @@ class Artist:
 @dataclass
 class Track:
     name: str
+    artist: Artist
 
 
 Tracks = list[Track]
