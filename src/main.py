@@ -3,9 +3,13 @@
 #  SPDX-License-Identifier: MIT  #
 # ============================== #
 
+
+from dotenv import load_dotenv
+
+
 def main() -> None:
-    pass
+    load_dotenv()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
