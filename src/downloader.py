@@ -33,9 +33,8 @@ class Downloader:
         if file_path is None:
             file_path = os.path.join(
                 config.YOUTUBE_DOWNLOAD_DIRECTORY,
-                config.FILES_NAME_TEMPLATE.format(
+                config.FILES_NAME_TEMPLATE_NO_IDX.format(
                     title=track.name,
-                    artist=track.artist.name,
                 ),
             )
 
