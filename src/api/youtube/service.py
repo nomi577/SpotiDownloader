@@ -4,7 +4,9 @@
 # ============================== #
 
 
-from api.youtube.types import YTVideoUrl
+import yt_dlp  # type: ignore[import-untyped]
+
+from api.youtube.types import YTVideoUrl, YDLOptions
 from googleapiclient.discovery import build  # type: ignore[import-untyped]
 from config import config
 
@@ -31,3 +33,18 @@ class YTService:
         video_id = response.get("items", [])[0]["id"]["videoId"]  # type: ignore[reportUnknownMemberType]
 
         return YTVideoUrl(f"https://www.youtube.com/watch?v={video_id}")
+
+    def download_video(
+        self,
+        url: YTVideoUrl,
+        filename: str,
+    ) -> None:
+        ydl_options: YDLOptions = {
+            "outtmpl": filename,
+            "quiet": True,
+            "noplaylist": True,
+            "restrictfilenames": True,
+        }
+
+        with yt_dlp.YoutubeDL(ydl_options) as ydl:
+            ydl.download([str(url)])  # type: ignore[reportUnknownMemberType]
