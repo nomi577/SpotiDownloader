@@ -23,5 +23,8 @@ class Config:
     YOUTUBE_DATA_API_V3_API_KEY: str = str(os.getenv("YOUTUBE_DATA_API_V3_API_KEY"))
     YOUTUBE_DOWNLOAD_DIRECTORY: str = "downloads"
 
+    # Files
+    FILES_TEMPLATE: str = "{artist} - {title}"
+
 
 config = Config()
