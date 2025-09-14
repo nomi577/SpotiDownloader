@@ -38,7 +38,7 @@ class Downloader:
                 ),
             )
 
-        self.__yt_service.download_video(url=video_url, file_path=file_path)
+        self.__yt_service.download_audio(url=video_url, file_path=file_path)
 
     def __download_playlist(self, playlist: Playlist) -> None:
         for track in playlist.tracks:
@@ -50,7 +50,7 @@ class Downloader:
                 ),
             )
 
-            self.__download_track(file_path=file_path, track=track)
+            self.__download_track(track=track, file_path=file_path)
 
     def download_pot(self, pot_url: PotUrl) -> None:
         pot: Optional[Track | Playlist] = self.__spotify_service.get_pot(

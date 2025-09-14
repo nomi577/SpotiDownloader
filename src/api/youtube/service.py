@@ -7,9 +7,10 @@
 import os
 import yt_dlp  # type: ignore[import-untyped]
 
-from api.youtube.types import YTVideoUrl, YDLOptions
+from api.youtube.types import YTVideoUrl
 from googleapiclient.discovery import build  # type: ignore[import-untyped]
 from config import config
+from typing import Any
 
 
 class YTService:
@@ -35,18 +36,33 @@ class YTService:
 
         return YTVideoUrl(f"https://www.youtube.com/watch?v={video_id}")
 
-    def download_video(
+    def download_audio(
         self,
         url: YTVideoUrl,
         file_path: str,
     ) -> None:
         os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
-        ydl_options: YDLOptions = {
+        ydl_options: dict[str, Any] = {
+            # pick best available audio only
+            "format": "bestaudio/best",
             "outtmpl": file_path,
             "quiet": True,
             "noplaylist": True,
             "restrictfilenames": True,
+            "postprocessors": [
+                {  # extract audio and convert to mp3
+                    "key": "FFmpegExtractAudio",
+                    "preferredcodec": "mp3",
+                    "preferredquality": "192",
+                },
+                {  # embed thumbnail if available
+                    "key": "EmbedThumbnail",
+                },
+                {  # add metadata
+                    "key": "FFmpegMetadata",
+                },
+            ],
         }
 
         with yt_dlp.YoutubeDL(ydl_options) as ydl:

@@ -82,7 +82,7 @@ class SpotifyService:
 
     def __get_all_tracks(self, playlist_id: str) -> Tracks:
         tracks: Tracks = []
-        next_batch: Tracks = []
+        next_batch: Tracks = self.__get_tracks(playlist_id=playlist_id)
 
         while len(next_batch) > 0 and len(tracks) < config.SPOTIFY_MAX_TRACKS:
             tracks.extend(next_batch)
@@ -121,3 +121,5 @@ class SpotifyService:
 
             case SpotifyShareURLType.TRACK:
                 return self.__get_track(track_id=pot_id)
+
+        return None
