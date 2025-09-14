@@ -4,6 +4,7 @@
 # ============================== #
 
 
+import os
 import yt_dlp  # type: ignore[import-untyped]
 
 from api.youtube.types import YTVideoUrl, YDLOptions
@@ -37,10 +38,12 @@ class YTService:
     def download_video(
         self,
         url: YTVideoUrl,
-        filename: str,
+        file_path: str,
     ) -> None:
+        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
         ydl_options: YDLOptions = {
-            "outtmpl": filename,
+            "outtmpl": file_path,
             "quiet": True,
             "noplaylist": True,
             "restrictfilenames": True,

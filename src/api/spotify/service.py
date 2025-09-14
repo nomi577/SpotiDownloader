@@ -16,7 +16,12 @@ from api.spotify.types import SpotifyShareURLType, PotUrl
 
 class SpotifyService:
     def __init__(self) -> None:
-        self.__spotify: Spotify = Spotify(auth_manager=SpotifyOAuth)
+        self.__spotify: Spotify = Spotify(
+            auth_manager=SpotifyOAuth(
+                client_id=config.SPOTIFY_CLIENT_ID,
+                client_secret=config.SPOTIFY_CLIENT_SECRET,
+            )
+        )
 
     def __get_pot_id(
         self, pot_url: PotUrl
