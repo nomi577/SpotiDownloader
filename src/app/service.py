@@ -45,24 +45,29 @@ class APP:
         self.__url_entry.update()
 
     def __download_pot(self) -> None:
-        try:
-            entry_value: Optional[str] = self.__url_entry.value
+        # try:
+        entry_value: Optional[str] = self.__url_entry.value
 
-            if entry_value is None:
-                self.__update_entry_status(valid=False)
-                return
+        if entry_value is None:
+            self.__update_entry_status(valid=False)
+            self.__page.open(
+                control=ft.SnackBar(content=ft.Text(value="Spotify URL required!"))
+            )
+            return
 
-            pot_url: PotUrl = PotUrl(entry_value)
+        pot_url: PotUrl = PotUrl(entry_value)
 
-            if not validate_pot_url(pot_url=pot_url):
-                print("Invalid URL!")
-                self.__update_entry_status(valid=False)
-                return
+        if not validate_pot_url(pot_url=pot_url):
+            self.__update_entry_status(valid=False)
+            self.__page.open(
+                control=ft.SnackBar(content=ft.Text(value="Invalid Spotify URL!"))
+            )
+            return
 
-            self.__update_entry_status(valid=True)
-            self.__downloader.download_pot(pot_url=pot_url)
-        except Exception as e:
-            self.__page.open(control=ft.SnackBar(content=ft.Text(value=str(e))))
+        self.__update_entry_status(valid=True)
+        self.__downloader.download_pot(pot_url=pot_url)
+        # except Exception as e:
+        #     self.__page.open(control=ft.SnackBar(content=ft.Text(value=str(e))))
 
     def setup_page(self) -> None:
         page: ft.Row = ft.Row(
