@@ -11,6 +11,7 @@ from api.youtube.types import YTVideoUrl
 from googleapiclient.discovery import build  # type: ignore[import-untyped]
 from config import config
 from typing import Any
+from utils.sanitization import sanitize
 
 
 class YTService:
@@ -41,7 +42,7 @@ class YTService:
         url: YTVideoUrl,
         file_path: str,
     ) -> None:
-        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+        os.makedirs(sanitize(os.path.dirname(file_path), allowed=r"\w/"), exist_ok=True)
 
         ydl_options: dict[str, Any] = {
             # pick best available audio only

@@ -6,7 +6,10 @@
 
 from api.classes import Track
 from config import config
+from utils.sanitization import sanitize
 
 
 def get_filename(track: Track) -> str:
-    return config.FILES_TEMPLATE.format(title=track.name, artist=track.artist.name)
+    return sanitize(
+        config.FILES_NAME_TEMPLATE.format(title=track.name, artist=track.artist.name)
+    )

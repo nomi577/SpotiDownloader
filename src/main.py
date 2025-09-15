@@ -4,35 +4,44 @@
 # ============================== #
 
 
+import flet as ft  # type: ignore[import-unknown]
+
 from dotenv import load_dotenv
-from api.spotify.service import SpotifyService
-from api.youtube.service import YTService
-from downloader import Downloader
-from api.spotify.types import PotUrl
+
+from app.service import APP
+
+# from api.spotify.service import SpotifyService
+# from api.youtube.service import YTService
+# from downloader import Downloader
+# from api.spotify.types import PotUrl
 
 
-def main() -> None:
+def main(page: ft.Page) -> None:
     load_dotenv()
 
-    spotify_service: SpotifyService = SpotifyService()
-    yt_service: YTService = YTService()
-    downloader: Downloader = Downloader(
-        spotify_service=spotify_service,
-        yt_service=yt_service,
-    )
+    app = APP(page=page)
 
-    while True:
-        user_input: str = input(
-            "Enter a playlist or track url to download or type 'exit' to quit > "
-        )
+    app.setup_page()
 
-        match user_input:
-            case "exit":
-                break
+    # spotify_service: SpotifyService = SpotifyService()
+    # yt_service: YTService = YTService()
+    # downloader: Downloader = Downloader(
+    #     spotify_service=spotify_service,
+    #     yt_service=yt_service,
+    # )
 
-            case _:
-                downloader.download_pot(pot_url=PotUrl(user_input))
+    # while True:
+    #     user_input: str = input(
+    #         "Enter a playlist or track url to download or type 'exit' to quit > "
+    #     )
+
+    #     match user_input:
+    #         case "exit":
+    #             break
+
+    #         case _:
+    #             downloader.download_pot(pot_url=PotUrl(user_input))
 
 
 if __name__ == "__main__":
-    main()
+    ft.app(target=main)  # type: ignore[reportUnknownMemberType]

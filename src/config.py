@@ -28,5 +28,11 @@ class Config:
     FILES_NAME_TEMPLATE: str = "{index}_{title}"
     FILES_NAME_TEMPLATE_NO_IDX: str = "{title}"
 
+    # APP
+    APP_TITLE: str = "SpotiDownloader"
+    APP_RESIZABLE: bool = True
+    APP_WIDTH: int = 1_000
+    APP_HEIGHT: int = 800
+
 
 config = Config()
