@@ -4,7 +4,7 @@
 # ============================== #
 
 
-import flet as ft  # type: ignore[import-unknown]
+import flet as ft  # type: ignore[import-untyped]
 
 from dotenv import load_dotenv
 

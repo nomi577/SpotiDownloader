@@ -14,6 +14,7 @@ class Artist:
 
 @dataclass
 class Track:
+    id: str
     name: str
     artist: Artist
 

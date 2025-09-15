@@ -12,6 +12,7 @@ from api.classes import Artist, Playlist, Track, Tracks
 from typing import Any, Optional
 from config import config
 from api.spotify.types import SpotifyShareURLType, PotUrl
+from uuid import uuid4
 
 
 class SpotifyService:
@@ -49,7 +50,7 @@ class SpotifyService:
 
         track_name: str = api_track.get("name", config.SPOTIFY_DEFAULT_TRACK_NAME)
 
-        return Track(name=track_name, artist=artist)
+        return Track(id=str(uuid4()), name=track_name, artist=artist)
 
     def __get_track(self, track_id: str) -> Track:
         api_track: dict[str, Any] = self.__spotify.track(track_id=track_id)  # type: ignore[reportUnknownMemberType]
@@ -59,7 +60,7 @@ class SpotifyService:
         # Get artist
         artist: Artist = self.__parse_artist(api_track=api_track)
 
-        return Track(name=name, artist=artist)
+        return Track(id=str(uuid4()), name=name, artist=artist)
 
     def __get_tracks(
         self,
