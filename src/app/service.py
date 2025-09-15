@@ -120,6 +120,9 @@ class APP:
 
     def __download_pot(self) -> None:
         try:
+            self.__download_tracks = {}
+            self.__download_tracks_list.controls = []
+
             entry_value: Optional[str] = self.__url_entry.value
 
             if entry_value is None:
