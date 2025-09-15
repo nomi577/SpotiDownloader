@@ -12,6 +12,7 @@ from api.youtube.service import YTService
 from downloader import Downloader
 from api.spotify.types import PotUrl
 from typing import Optional
+from utils.pot_url import validate_pot_url
 
 
 class APP:
@@ -34,16 +35,31 @@ class APP:
 
         # Create widgets
         self.__url_entry: ft.TextField = ft.TextField(label="Spotify URL")
+        self.__download_button: ft.ElevatedButton = ft.ElevatedButton(
+            text="Download",
+            on_click=lambda _: self.__download_pot(),
+        )
 
-    def __update_entry_status(self) -> None: ...
+    def __update_entry_status(self, valid: bool) -> None:
+        self.__url_entry.border_color = None if valid else ft.Colors.ERROR
+        self.__url_entry.update()
 
-    def download_pot(self) -> None:
-        pot_url: Optional[str] = self.__url_entry.value
+    def __download_pot(self) -> None:
+        entry_value: Optional[str] = self.__url_entry.value
 
-        if pot_url is None:
-            self.__update_entry_status()
+        if entry_value is None:
+            self.__update_entry_status(valid=False)
+            return
 
-        # self.__downloader.download_pot(pot_url=PotUrl(str(self.__url_entry.value)))
+        pot_url: PotUrl = PotUrl(entry_value)
+
+        if not validate_pot_url(pot_url=pot_url):
+            print("Invalid URL!")
+            self.__update_entry_status(valid=False)
+            return
+
+        self.__update_entry_status(valid=True)
+        self.__downloader.download_pot(pot_url=pot_url)
 
     def setup_page(self) -> None:
         page: ft.Row = ft.Row(
@@ -56,7 +72,8 @@ class APP:
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     expand=True,
                     controls=[
-                        ft.Text(value="Hello World!"),
+                        self.__url_entry,
+                        self.__download_button,
                     ],
                 )
             ],
