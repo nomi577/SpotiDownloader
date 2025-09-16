@@ -12,14 +12,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app.service import APP
-from config import config
 
 
 def main(page: ft.Page) -> None:
-    print(
-        f"{config.SPOTIFY_CLIENT_ID=}, {config.SPOTIFY_CLIENT_SECRET=}, {config.YOUTUBE_DATA_API_V3_API_KEY=}"
-    )
-
     app = APP(page=page)
 
     app.setup_page()
